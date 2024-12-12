@@ -36,7 +36,9 @@ The application follows the MVC (Model-View-Controller) pattern:
 - Built with Entity Framework Core for seamless ORM integration.
 - Automatically generates the database schema on first run.
 - SQL Server is the default provider, and the connection string is configurable via appsettings.json.
+  
 ***Database Structure:***
+  
 1. Animals: Contains information about pets, including name, age, description, and picture.
 2. Categories: Organizes animals into meaningful groups (e.g., Mammals, Reptiles).
 3. Comments: Stores user-generated feedback linked to specific animals.
