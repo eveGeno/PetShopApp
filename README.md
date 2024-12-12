@@ -63,3 +63,22 @@ cd PetShopApp
 >  http://localhost:YOUR_PORT
 -  Explore the Home, Catalog, and Admin views.
 
+## Screenshots
+
+<p align="center">
+    <img src="https://raw.githubusercontent.com/eveGeno/PetShopApp/refs/heads/PSApp/Images/Screenshot5.png" alt="Main Screenshot" width="80%" />
+</p>
+<p align="center"><em>Home Page</em></p>
+
+<p align="center">
+    <img src="https://raw.githubusercontent.com/eveGeno/PetShopApp/refs/heads/PSApp/Images/Screenshot2.png" alt="Catalog Screenshot" width="32%" style="margin-right: 1%;" />
+    <img src="https://raw.githubusercontent.com/eveGeno/PetShopApp/refs/heads/PSApp/Images/Screenshot3.png" alt="Admin Screenshot" width="32%" style="margin-right: 1%;" />
+    <img src="https://raw.githubusercontent.com/eveGeno/PetShopApp/refs/heads/PSApp/Images/Screenshot4.png" alt="Dark Mode Screenshot" width="32%" />
+</p>
+<p align="center">
+    <em>Catalog</em> | <em>Admin Page</em> | <em>Dark Mode</em>
+</p>
+
+
+
+
