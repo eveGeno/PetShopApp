@@ -15,6 +15,7 @@
   - Switch between grid view and table view.
   - Use pagination for easier navigation across large datasets.
   - Click on an animal to view its detailed page, including category, description, and comments.
+
 ***Admin View***
 
 - Allows the admin to:
