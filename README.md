@@ -25,13 +25,14 @@
   - Supports file uploads for animal pictures alongside direct URL input.
   
 ***Architecture***
+
 The application follows the MVC (Model-View-Controller) pattern:
 
  - Model: Handles data structures for animals, categories, and comments.
  - View: Displays dynamic content with user-friendly interfaces for visitors and administrators.
  - Controller: Manages user requests, updates models, and selects appropriate views to render.
    
-## ***Database***
+## **Database**
 - Built with Entity Framework Core for seamless ORM integration.
 - Automatically generates the database schema on first run.
 - SQL Server is the default provider, and the connection string is configurable via appsettings.json.
