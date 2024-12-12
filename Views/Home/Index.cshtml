@@ -1,0 +1,38 @@
+﻿@model IEnumerable<PetShopApplication.Models.Animal>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center my-4 animated fadeIn">Welcome to Pet Shop!</h1>
+
+<p class="text-center">Here are the most popular animals:</p>
+
+@if (!Model.Any())
+{
+    <p class="text-center">No animals available at the moment.</p>
+}
+else
+{
+    <div class="row justify-content-center">
+        @foreach (var animal in Model)
+        {
+            <div class="col-12 col-md-6 col-lg-4 d-flex justify-content-center mb-4">
+                <div class="card shadow" style="width: 18rem;">
+                    <a href="/Animal/Details/@animal.Id">
+                        <!-- Переход на детали животного -->
+                        <img src="@animal.Picture" class="card-img-top" alt="@animal.Name" />
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">@animal.Name</h5>
+                        <p class="card-text">Comments: @animal.Comments.Count</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+
+
+
+

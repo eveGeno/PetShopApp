@@ -1,0 +1,25 @@
+﻿@model PetShopApplication.Models.Category
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1 class="text-center mb-4">Add Category</h1>
+
+            <form method="post" asp-action="Add" asp-controller="Category">
+                @Html.AntiForgeryToken()
+
+                <div class="form-group">
+                    <label for="Name">Category Name</label>
+                    <input type="text" class="form-control" id="Name" name="Name" value="@Model.Name" />
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,287 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Pet Shop</title>
+    <link rel="icon" type="image/png" href="/Images/pshoptt.png" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css/animate.min.css" />
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            transition: background-color 0 ease, color 0 ease;
+        }
+
+        body {
+            background-color: #fff2e6;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            font-family: Hack, monospace;
+        }
+
+            /* DarkMode */
+            body.dark-mode {
+                background-color: #343a40;
+                color: #ffffff;
+            }
+
+        .container {
+            flex: 1;
+        }
+
+        .navbar {
+            background-color: #ffcc99;
+            transition: all 1s ease-in-out;
+            text-transform: uppercase;
+        }
+
+            .navbar .navbar-brand img {
+                height: 50px;
+            }
+
+            .navbar .nav-link {
+                color: #ffffff !important;
+                font-weight: bold;
+                border-radius: 2px;
+                padding: 2px 10px;
+                transition: all 0.5s ease-in-out;
+                position: relative;
+                text-transform: uppercase;
+            }
+
+                .navbar .nav-link::before {
+                    content: attr(data-item);
+                    transition: 0.5s;
+                    color: #ff9966;
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    width: 0;
+                    overflow: hidden;
+                }
+
+                .navbar .nav-link:hover::before {
+                    width: 100%;
+                    transition: all 0.5s ease-in-out;
+                }
+
+                .navbar .nav-link:hover {
+                    background-color: #ffe6cc !important;
+                    color: #343a40 !important;
+                }
+
+                .navbar .nav-link.active {
+                    background-color: #ffe6cc !important;
+                    color: #343a40 !important;
+                    border: 1px solid #343a40;
+                }
+
+
+        /* Footer */
+        .footer {
+            background-color: #ffcc99;
+            color: white;
+            padding: 10px 0;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Cards */
+        .card {
+            border: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .card:hover {
+                transform: scale(1.05);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            }
+
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+            .card-img-top:hover {
+                opacity: 0.8;
+            }
+
+        /* darmode navbar and footer */
+        .navbar.dark-mode {
+            background-color: #212529;
+        }
+
+        .footer.dark-mode {
+            background-color: #212529;
+            color: #ffffff;
+        }
+
+        .card.dark-mode {
+            background-color: #495057;
+            color: #ffffff;
+        }
+
+        /* Link and text settings */
+        body.dark-mode .navbar .nav-link,
+        body.dark-mode .form-check-label {
+            color: #ffffff !important;
+        }
+
+        body.dark-mode .card-text,
+        body.dark-mode .card-title,
+        body.dark-mode .navbar .nav-link,
+        body.dark-mode footer {
+            color: #ffffff !important;
+        }
+
+        /* text colors on pages in dark mode */
+        .dark-mode .text-white {
+            color: #ffffff !important;
+        }
+
+        .btn {
+            align-items: center;
+            background-color: #ffcc99; /* button color */
+            border: 1px solid transparent;
+            border-radius: .25rem; /* Rounding corners */
+            color: #343a40; /* Text color */
+            font-weight: bold;
+            padding: 0.5rem 1rem; /* inden */
+            text-align: center;
+            transition: all 250ms ease-in-out;
+        }
+
+            .btn:hover {
+                background-color: #ffe6cc; /* Hover color */
+                color: #212529; /* Text color on hover */
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Shadow */
+                transform: scale(1.05); /* Easy increase */
+            }
+
+            .btn:active {
+                background-color: #e6b894; /* Color on click */
+                transform: scale(1); /* Remove the magnification */
+            }
+
+        /* paging */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+            .pagination .page-item.active .page-link {
+                background-color: #ffcc99;
+                border-color: #ffcc99;
+                color: #ffffff;
+            }
+
+            .pagination .page-link {
+                color: #343a40;
+                transition: background-color 0.3s, color 0.3s;
+            }
+
+                .pagination .page-link:hover {
+                    background-color: #ffe6cc;
+                    color: #343a40;
+                }
+
+            .pagination .page-item.disabled .page-link {
+                color: #d3d3d3;
+            }
+
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                <img src="/Images/pshop.png" alt="Pet Shop Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" ? "active" : "")" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Catalog" ? "active" : "")" href="/Catalog">Catalog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Admin" ? "active" : "")" href="/Admin">Admin</a>
+                    </li>
+                    @if (Context.Request.Path.StartsWithSegments("/Admin"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Category" ? "active" : "")" href="/Category/Index">Categories</a>
+                        </li>
+                    }
+                </ul>
+                <div class="form-check form-switch ms-auto">
+                    <input class="form-check-input" type="checkbox" id="darkModeToggle" />
+                    <label class="form-check-label" for="darkModeToggle">Dark Mode</label>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        @RenderBody()
+    </div>
+
+    <footer class="footer text-center">
+        <p>&copy; 2024 Pet Shop Evgeni</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.6.0.min.js"></script>
+    <script>
+        // Dark Mode with Statefulness
+        const toggle = document.getElementById("darkModeToggle");
+        const body = document.body;
+        const navbar = document.querySelector(".navbar");
+        const footer = document.querySelector(".footer");
+        const cards = document.querySelectorAll(".card");
+
+        const applyDarkMode = (enable) => {
+            if (enable) {
+                body.classList.add("dark-mode");
+                navbar.classList.add("dark-mode");
+                footer.classList.add("dark-mode");
+                cards.forEach(card => card.classList.add("dark-mode"));
+                localStorage.setItem("darkMode", "true");
+            } else {
+                body.classList.remove("dark-mode");
+                navbar.classList.remove("dark-mode");
+                footer.classList.remove("dark-mode");
+                cards.forEach(card => card.classList.remove("dark-mode"));
+                localStorage.setItem("darkMode", "false");
+            }
+        };
+
+        toggle.addEventListener("change", () => applyDarkMode(toggle.checked));
+
+        // Loading
+        //  when opening a page
+        const darkModeEnabled = localStorage.getItem("darkMode") === "true";
+        toggle.checked = darkModeEnabled;
+        applyDarkMode(darkModeEnabled);
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+

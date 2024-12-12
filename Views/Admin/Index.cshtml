@@ -1,0 +1,49 @@
+﻿@model IEnumerable<PetShopApplication.Models.Animal>
+<div class="container">
+    <h1 class="text-center">Admin - Manage Animals</h1>
+    <a href="/Admin/Add" class="btn btn-primary mb-3">Add New Animal</a>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Picture</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Age</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var animal in Model)
+            {
+                <tr>
+                    <td>
+                        <img src="@animal.Picture" alt="@animal.Name" width="100" />
+                    </td>
+                    <td>@animal.Name</td>
+                    <td>@(animal.Category?.Name ?? "No Category")</td>
+                    <td>@animal.Age</td>
+                    <td>
+                        <a href="/Admin/Edit/@animal.Id" class="btn btn-warning btn-sm">Edit</a>
+                        <form method="post" asp-action="Delete" asp-controller="Admin" class="d-inline-block">
+                            <input type="hidden" name="id" value="@animal.Id" />
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <nav>
+        <ul class="pagination justify-content-center">
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                    <a class="page-link" href="/Admin/Index?page=@i">@i</a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>
+
+

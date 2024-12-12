@@ -1,0 +1,18 @@
+﻿@model PetShopApplication.Models.Category
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center">Edit Category</h1>
+
+<form method="post" asp-action="Edit" asp-controller="Category">
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <label for="Name">Category Name</label>
+        <input type="text" class="form-control" id="Name" name="Name" value="@Model.Name" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+</form>
+

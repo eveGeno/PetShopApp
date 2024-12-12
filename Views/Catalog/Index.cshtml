@@ -1,0 +1,137 @@
+﻿@model IEnumerable<PetShopApplication.Models.Animal>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var categories = ViewBag.Categories as List<PetShopApplication.Models.Category>;
+    var selectedCategory = ViewBag.SelectedCategory as string;
+}
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Animal Catalog</h1>
+
+    <!-- Переключатель между таблицей и карточками -->
+    <div class="mb-4 text-center">
+        <button id="viewGrid" class="btn btn-outline-secondary active" onclick="toggleView('grid')">Grid View</button>
+        <button id="viewTable" class="btn btn-outline-secondary" onclick="toggleView('table')">Table View</button>
+    </div>
+
+    <!-- Форма фильтрации по категориям -->
+    <div class="row mb-4 justify-content-center">
+        <div class="col-md-6">
+            <form method="get" class="d-flex">
+                <select id="category" name="category" class="form-select" onchange="this.form.submit()">
+                    <option value="">All Categories</option>
+                    @if (categories != null)
+                    {
+                        foreach (var category in categories)
+                        {
+                            <option value="@category.Name" selected="@(category.Name == selectedCategory ? "selected" : null)">@category.Name</option>
+                        }
+                    }
+                    else
+                    {
+                        <option>No categories available</option>
+                    }
+                </select>
+            </form>
+        </div>
+    </div>
+
+    <!-- Grid View -->
+    <div id="gridView" class="container-fluid">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+            @foreach (var animal in Model)
+            {
+                <div class="col">
+                    <div class="card shadow">
+                        <a href="/Animal/Details/@animal.Id">
+                            <img src="@animal.Picture" class="card-img-top" alt="@animal.Name" />
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">@animal.Name</h5>
+                            <p class="card-text">Category: @(animal.Category?.Name ?? "No Category")</p>
+                            <a href="/Animal/Details/@animal.Id" class="btn btn-primary w-100">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Table View -->
+    <div id="tableView" style="display: none;">
+        <table class="table table-bordered table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Picture</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var animal in Model)
+                {
+                    <tr>
+                        <td>
+                            <img src="@animal.Picture" alt="@animal.Name" width="100" class="img-fluid" />
+                        </td>
+                        <td>@animal.Name</td>
+                        <td>@(animal.Category?.Name ?? "No Category")</td>
+                        <td>
+                            <a href="/Animal/Details/@animal.Id" class="btn btn-info btn-sm">Details</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Пагинация -->
+    <nav class="mt-4">
+        <ul class="pagination justify-content-center">
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                    <a class="page-link" href="?category=@selectedCategory&page=@i">@i</a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>
+
+<script>
+    // Переключение между Grid и Table View
+    function toggleView(view) {
+        const gridView = document.getElementById('gridView');
+        const tableView = document.getElementById('tableView');
+        const viewGridBtn = document.getElementById('viewGrid');
+        const viewTableBtn = document.getElementById('viewTable');
+
+        if (view === 'grid') {
+            gridView.style.display = 'block';
+            tableView.style.display = 'none';
+            viewGridBtn.classList.add('active');
+            viewTableBtn.classList.remove('active');
+            localStorage.setItem("viewMode", "grid");
+        } else {
+            gridView.style.display = 'none';
+            tableView.style.display = 'block';
+            viewGridBtn.classList.remove('active');
+            viewTableBtn.classList.add('active');
+            localStorage.setItem("viewMode", "table");
+        }
+    }
+
+    // Загружаем последний выбранный режим
+    const savedViewMode = localStorage.getItem("viewMode");
+    if (savedViewMode) {
+        toggleView(savedViewMode);
+    } else {
+        toggleView("grid");
+    }
+</script>
+
+
+
+
+
